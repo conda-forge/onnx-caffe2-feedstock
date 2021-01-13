@@ -17,7 +17,7 @@ build:
     - python setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
-  build:
+  host:
     - python
     - pytest-runner
     - enum34  # [py2k]
@@ -36,8 +36,6 @@ test:
   # This appeases the linter (which requires a test), and eventually
   # we're going to build some C++ in this package, which will be helpful
   commands:
-    - conda inspect linkages -p $PREFIX {{ name }}  # [unix]
-    - conda inspect objects -p $PREFIX {{ name }}   # [osx]
 
 about:
   home: https://github.com/onnx/onnx-caffe2/
