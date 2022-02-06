@@ -1,26 +1,25 @@
 {% set name = "onnx-caffe2" %}
 {% set version = "1.0.0" %}
-{% set sha256 = "ef4ba9a71798b7a5dd0a1897fb33eddd7bba148236a01abf0a0dc160e98bf020" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: ef4ba9a71798b7a5dd0a1897fb33eddd7bba148236a01abf0a0dc160e98bf020
 
 build:
-  number: 1003
+  number: 1004
+  noarch: python
   script:
-    - python setup.py install --single-version-externally-managed --record=record.txt
+    - pip install -e . -vvv
 
 requirements:
   host:
     - python
+    - pip
     - pytest-runner
-    - enum34  # [py2k]
   run:
     - python
     - onnx
@@ -41,7 +40,7 @@ about:
   home: https://github.com/onnx/onnx-caffe2/
   license: MIT
   license_family: MIT
-  license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'  # https://github.com/onnx/onnx-caffe2/pull/81
+  license_file: LICENSE  # https://github.com/onnx/onnx-caffe2/pull/81
   summary: Caffe2 implementation of Open Neural Network Exchange (ONNX)
   description: |
     This library provides Caffe2 importer and exporter for the ONNX format.
@@ -49,3 +48,4 @@ about:
 extra:
   recipe-maintainers:
     - ezyang
+    - xhochy
