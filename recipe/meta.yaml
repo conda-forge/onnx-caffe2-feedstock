@@ -17,11 +17,11 @@ build:
 
 requirements:
   host:
-    - python
+    - python >=3.6
     - pip
     - pytest-runner
   run:
-    - python
+    - python >=3.6
     - onnx
     - click
     # NB: caffe2 is not conda managed, so don't put it as a "dep"
