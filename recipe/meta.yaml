@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: ef4ba9a71798b7a5dd0a1897fb33eddd7bba148236a01abf0a0dc160e98bf020
 
 build:
-  number: 1004
+  number: 1005
   noarch: python
   script:
     - pip install -e . -vvv
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
     - pytest-runner
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - onnx
     - click
     # NB: caffe2 is not conda managed, so don't put it as a "dep"
@@ -34,6 +34,8 @@ test:
 
   # This appeases the linter (which requires a test), and eventually
   # we're going to build some C++ in this package, which will be helpful
+  requires:
+    - python {{ python_min }}
   commands:
 
 about:
